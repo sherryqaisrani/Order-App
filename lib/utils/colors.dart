@@ -10,4 +10,6 @@ class CustomTheme {
   static Color lightWhiteColor = const Color(0xffF8F7FB);
   static Color lightwhiteColor = const Color(0xffF6F6F6);
   static Color lightOrangeColor = const Color(0xffF9E1E0);
+
+  static Color borderColor = const Color(0xffDFDFDF);
 }
