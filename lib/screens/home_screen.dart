@@ -9,12 +9,12 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
   int currentIndex = 0;
 
-  List screens = [HomePageScreen()];
+  List screens = [const HomePageScreen()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
+      drawer: const Drawer(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         items: [
@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
       ),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.black,
         ),
         elevation: 0,

@@ -13,7 +13,7 @@ class FavouritList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-        left: 15.w,
+        right: 15.w,
       ),
       decoration: BoxDecoration(
         border: Border.all(

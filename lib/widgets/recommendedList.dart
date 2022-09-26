@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:order_app/utils/file_path.dart';
 
 class RecommendedList extends StatelessWidget {
@@ -9,8 +10,9 @@ class RecommendedList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 190,
       margin: EdgeInsets.only(
-        left: 15.w,
+        right: 15.w,
       ),
       decoration: BoxDecoration(
         border: Border.all(
@@ -38,7 +40,7 @@ class RecommendedList extends StatelessWidget {
               horizontal: 8.w,
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Best Fruites',
@@ -71,20 +73,14 @@ class RecommendedList extends StatelessWidget {
                     color: Color(0xff999999),
                   ),
                 ),
-                SizedBox(
-                  width: 100,
-                  height: 15.h,
-                  child: ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 5,
-                    shrinkWrap: true,
-                    clipBehavior: Clip.hardEdge,
-                    itemBuilder: (context, index) => SvgPicture.asset(
+                Row(
+                  children: List.generate(
+                    5,
+                    (index) => SvgPicture.asset(
                       AppFiles.star,
                     ),
                   ),
-                ),
+                )
               ],
             ),
           )

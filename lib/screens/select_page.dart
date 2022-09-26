@@ -14,8 +14,6 @@ class SelectPage extends StatefulWidget {
 }
 
 class _SelectPageState extends State<SelectPage> {
-  String selectedValue = '';
-
   List<DropdownMenuItem> countriesList = [
     const DropdownMenuItem(
       child: Text(
@@ -50,7 +48,7 @@ class _SelectPageState extends State<SelectPage> {
   ];
 
   List<DropdownMenuItem> venderList = [
-    const DropdownMenuItem(
+    DropdownMenuItem(
       child: Text(
         'London CJ foods',
       ),
@@ -81,6 +79,7 @@ class _SelectPageState extends State<SelectPage> {
       value: 'Norfolk Broadland Foods',
     )
   ];
+  String selectedValue = '';
 
   // var venderList = [
   @override
@@ -112,6 +111,7 @@ class _SelectPageState extends State<SelectPage> {
                 children: [
                   DropdownButtonFormField(
                     onSaved: (newValue) => print(newValue),
+                    onTap: () {},
                     items: countriesList,
                     hint: const Text('Select Country'),
                     onChanged: (value) {
@@ -132,12 +132,7 @@ class _SelectPageState extends State<SelectPage> {
                         ? venderList
                         : <DropdownMenuItem>[
                             selectedValue == 'London'
-                                ? const DropdownMenuItem(
-                                    child: Text(
-                                      'London CJ foods',
-                                    ),
-                                    value: 'London CJ foods',
-                                  )
+                                ? venderList[0]
                                 : selectedValue == 'Coventry'
                                     ? const DropdownMenuItem(
                                         child: Text(
@@ -169,7 +164,44 @@ class _SelectPageState extends State<SelectPage> {
                                               )
                           ],
                     hint: const Text('Select Vender'),
-                    onChanged: (_) {},
+                    onTap: () {
+                      setState(() {
+                        <DropdownMenuItem>[
+                          selectedValue == 'London'
+                              ? venderList[0]
+                              : selectedValue == 'Coventry'
+                                  ? const DropdownMenuItem(
+                                      child: Text(
+                                        'Coventry B A Dairies',
+                                      ),
+                                      value: 'Coventry B A Dairies',
+                                    )
+                                  : selectedValue == 'Cardiff'
+                                      ? const DropdownMenuItem(
+                                          child: Text(
+                                            'Cardiff Cymru Dairy',
+                                          ),
+                                          value: 'Cardiff Cymru Dairy',
+                                        )
+                                      : selectedValue == 'Peterborough'
+                                          ? const DropdownMenuItem(
+                                              child: Text(
+                                                'Peterborough East Anglia',
+                                              ),
+                                              value: 'Peterborough East Anglia',
+                                            )
+                                          : const DropdownMenuItem(
+                                              child: Text(
+                                                'Norfolk Broadland Foods',
+                                              ),
+                                              value: 'Norfolk Broadland Foods',
+                                            )
+                        ];
+                      });
+                    },
+                    onChanged: (value) {
+                      // setState(() {});
+                    },
                     decoration: getInputDecoration(hintText: 'Select Country'),
                   ),
                   SizedBox(
