@@ -47,6 +47,8 @@ class _SelectPageState extends State<SelectPage> {
     ),
   ];
 
+  List<DropdownMenuItem> vendeerList3 = [];
+
   List<DropdownMenuItem> venderList = [
     DropdownMenuItem(
       child: Text(
@@ -84,6 +86,7 @@ class _SelectPageState extends State<SelectPage> {
   // var venderList = [
   @override
   Widget build(BuildContext context) {
+    // List<DropdownMenuItem> vendeerList3 = [];
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -111,12 +114,23 @@ class _SelectPageState extends State<SelectPage> {
                 children: [
                   DropdownButtonFormField(
                     onSaved: (newValue) => print(newValue),
-                    onTap: () {},
+                    onTap: () {
+                      // setState(() {});
+                      // // setState(() {
+                      // //   selectedValue == '';
+                      // // });
+                    },
                     items: countriesList,
                     hint: const Text('Select Country'),
                     onChanged: (value) {
                       setState(() {
                         selectedValue = value;
+
+                        selectedValue == 'London'
+                            ? vendeerList3.add(venderList[0])
+                            : selectedValue == 'Cardiff'
+                                ? vendeerList3.add(venderList[1])
+                                : venderList;
 
                         print(selectedValue);
                       });
@@ -128,79 +142,14 @@ class _SelectPageState extends State<SelectPage> {
                   ),
                   DropdownButtonFormField(
                     onSaved: (newValue) => print(newValue),
-                    items: selectedValue == ''
-                        ? venderList
-                        : <DropdownMenuItem>[
-                            selectedValue == 'London'
-                                ? venderList[0]
-                                : selectedValue == 'Coventry'
-                                    ? const DropdownMenuItem(
-                                        child: Text(
-                                          'Coventry B A Dairies',
-                                        ),
-                                        value: 'Coventry B A Dairies',
-                                      )
-                                    : selectedValue == 'Cardiff'
-                                        ? const DropdownMenuItem(
-                                            child: Text(
-                                              'Cardiff Cymru Dairy',
-                                            ),
-                                            value: 'Cardiff Cymru Dairy',
-                                          )
-                                        : selectedValue == 'Peterborough'
-                                            ? const DropdownMenuItem(
-                                                child: Text(
-                                                  'Peterborough East Anglia',
-                                                ),
-                                                value:
-                                                    'Peterborough East Anglia',
-                                              )
-                                            : const DropdownMenuItem(
-                                                child: Text(
-                                                  'Norfolk Broadland Foods',
-                                                ),
-                                                value:
-                                                    'Norfolk Broadland Foods',
-                                              )
-                          ],
+                    items: vendeerList3,
                     hint: const Text('Select Vender'),
-                    onTap: () {
-                      setState(() {
-                        <DropdownMenuItem>[
-                          selectedValue == 'London'
-                              ? venderList[0]
-                              : selectedValue == 'Coventry'
-                                  ? const DropdownMenuItem(
-                                      child: Text(
-                                        'Coventry B A Dairies',
-                                      ),
-                                      value: 'Coventry B A Dairies',
-                                    )
-                                  : selectedValue == 'Cardiff'
-                                      ? const DropdownMenuItem(
-                                          child: Text(
-                                            'Cardiff Cymru Dairy',
-                                          ),
-                                          value: 'Cardiff Cymru Dairy',
-                                        )
-                                      : selectedValue == 'Peterborough'
-                                          ? const DropdownMenuItem(
-                                              child: Text(
-                                                'Peterborough East Anglia',
-                                              ),
-                                              value: 'Peterborough East Anglia',
-                                            )
-                                          : const DropdownMenuItem(
-                                              child: Text(
-                                                'Norfolk Broadland Foods',
-                                              ),
-                                              value: 'Norfolk Broadland Foods',
-                                            )
-                        ];
-                      });
-                    },
+                    onTap: () {},
                     onChanged: (value) {
-                      // setState(() {});
+                      setState(() {
+                        value = vendeerList3;
+                        vendeerList3.clear();
+                      });
                     },
                     decoration: getInputDecoration(hintText: 'Select Country'),
                   ),

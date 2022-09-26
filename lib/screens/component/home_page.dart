@@ -34,8 +34,9 @@ class HomePageScreen extends StatelessWidget {
                           builder: (context) => WeeklyRegularOrder()));
                 },
                 child: HomeContainer(
-                    titleText: 'My Regular Orders!',
-                    imageIcon: "assets/images/Walking.png"),
+                  titleText: 'My Regular Orders!',
+                  imageIcon: AppFiles.weeklyOrder,
+                ),
               ),
               InkWell(
                 onTap: () {
@@ -44,7 +45,7 @@ class HomePageScreen extends StatelessWidget {
                 },
                 child: HomeContainer(
                   titleText: 'MAKE A PAYMENT',
-                  imageIcon: "assets/images/Survey.png",
+                  imageIcon: AppFiles.makeAPayment,
                 ),
               ),
             ],
@@ -66,8 +67,7 @@ class HomePageScreen extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => ShopNow()));
                 },
                 child: HomeContainer(
-                    titleText: 'SHOP NOW',
-                    imageIcon: "assets/images/Traffic Accident.png"),
+                    titleText: 'SHOP NOW', imageIcon: AppFiles.shopNow),
               ),
               InkWell(
                 onTap: () {
@@ -75,8 +75,7 @@ class HomePageScreen extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => Holidays()));
                 },
                 child: HomeContainer(
-                    titleText: 'Holidays',
-                    imageIcon: "assets/images/Hail Damage.png"),
+                    titleText: 'Holidays', imageIcon: AppFiles.holiday),
               ),
             ],
           ),
@@ -99,8 +98,7 @@ class HomePageScreen extends StatelessWidget {
                   //         builder: (context) => ShiftDetailScreen()));
                 },
                 child: HomeContainer(
-                    titleText: 'Last Invoice',
-                    imageIcon: "assets/images/shift_icon.png"),
+                    titleText: 'Last Invoice', imageIcon: AppFiles.lastInvoice),
               ),
               InkWell(
                 onTap: () {
@@ -111,7 +109,41 @@ class HomePageScreen extends StatelessWidget {
                 },
                 child: HomeContainer(
                     titleText: 'Delivery History',
-                    imageIcon: "assets/images/video_training_icon.png"),
+                    imageIcon: AppFiles.deliveryHistory),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 30,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              InkWell(
+                onTap: () {
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => ShiftDetailScreen()));
+                },
+                child: HomeContainer(
+                    titleText: 'Personal Profile',
+                    imageIcon: AppFiles.personalInfo),
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => DeliveryHistory()));
+                },
+                child: HomeContainer(
+                    titleText: 'Logout', imageIcon: AppFiles.logout),
               ),
             ],
           ),

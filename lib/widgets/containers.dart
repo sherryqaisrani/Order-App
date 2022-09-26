@@ -31,7 +31,11 @@ class HomeContainer extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image(image: AssetImage(imageIcon)),
+              Image(
+                image: AssetImage(imageIcon),
+                width: 44,
+                height: 44,
+              ),
               const SizedBox(
                 height: 10,
               ),

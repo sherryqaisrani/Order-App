@@ -28,6 +28,16 @@ class HomeScreen extends StatelessWidget {
                 AppFiles.location,
               ),
               label: 'Location'),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                AppFiles.heartBottom,
+              ),
+              label: 'Favourit'),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                AppFiles.notification,
+              ),
+              label: 'Notification'),
         ],
       ),
       appBar: AppBar(
