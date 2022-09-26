@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:order_app/screens/customer_type.dart';
 import 'package:order_app/screens/signup_screen.dart';
 import 'package:order_app/utils/colors.dart';
@@ -14,79 +15,31 @@ class SelectPage extends StatefulWidget {
 }
 
 class _SelectPageState extends State<SelectPage> {
-  List<DropdownMenuItem> countriesList = [
-    const DropdownMenuItem(
-      child: Text(
-        'London',
-      ),
-      value: 'London',
-    ),
-    const DropdownMenuItem(
-      child: Text(
-        'Coventry',
-      ),
-      value: 'Coventry',
-    ),
-    const DropdownMenuItem(
-      child: Text(
-        'Cardiff',
-      ),
-      value: 'Cardiff',
-    ),
-    const DropdownMenuItem(
-      child: Text(
-        'Peterborough',
-      ),
-      value: 'Peterborough',
-    ),
-    const DropdownMenuItem(
-      child: Text(
-        'Norfolk',
-      ),
-      value: 'Norfolk',
-    ),
+  int? selectedValueIndex;
+  List<String> countriesList = [
+    'London',
+    'Coventry',
+    'Cardiff',
+    'Peterborough',
+    'Norfolk',
   ];
 
-  List<DropdownMenuItem> vendeerList3 = [];
-
-  List<DropdownMenuItem> venderList = [
-    DropdownMenuItem(
-      child: Text(
-        'London CJ foods',
-      ),
-      value: 'London CJ foods',
-    ),
-    const DropdownMenuItem(
-      child: Text(
-        'Coventry B A Dairies',
-      ),
-      value: 'Coventry B A Dairies',
-    ),
-    const DropdownMenuItem(
-      child: Text(
-        'Cardiff Cymru Dairy',
-      ),
-      value: 'Cardiff Cymru Dairy',
-    ),
-    const DropdownMenuItem(
-      child: Text(
-        'Peterborough East Anglia',
-      ),
-      value: 'Peterborough East Anglia',
-    ),
-    const DropdownMenuItem(
-      child: Text(
-        'Norfolk Broadland Foods',
-      ),
-      value: 'Norfolk Broadland Foods',
-    )
+  List<String> venderList = [
+    'London CJ foods',
+    'Coventry B A Dairies',
+    'Cardiff Cymru Dairy',
+    'Peterborough East Anglia',
+    'Norfolk Broadland Foods',
   ];
   String selectedValue = '';
-
+  String selectedVender = '';
+  Color myColor = Colors.grey[300]!;
+  bool listview = false;
+  bool listview1 = false;
+  bool tapped = false;
   // var venderList = [
   @override
   Widget build(BuildContext context) {
-    // List<DropdownMenuItem> vendeerList3 = [];
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -112,46 +65,154 @@ class _SelectPageState extends State<SelectPage> {
               ),
               child: Column(
                 children: [
-                  DropdownButtonFormField(
-                    onSaved: (newValue) => print(newValue),
-                    onTap: () {
-                      // setState(() {});
-                      // // setState(() {
-                      // //   selectedValue == '';
-                      // // });
-                    },
-                    items: countriesList,
-                    hint: const Text('Select Country'),
-                    onChanged: (value) {
-                      setState(() {
-                        selectedValue = value;
-
-                        selectedValue == 'London'
-                            ? vendeerList3.add(venderList[0])
-                            : selectedValue == 'Cardiff'
-                                ? vendeerList3.add(venderList[1])
-                                : venderList;
-
-                        print(selectedValue);
-                      });
-                    },
-                    decoration: getInputDecoration(hintText: 'Select Country'),
+                  Container(
+                    width: Get.width,
+                    height: 55.h,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: myColor, width: 2),
+                      borderRadius: BorderRadius.circular(
+                        8.r,
+                      ),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          listview1 = !listview1;
+                        });
+                      },
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 8.0.w, top: 0.h),
+                              child: Text(
+                                selectedValue == ''
+                                    ? "Select City here..."
+                                    : selectedValue,
+                                style: TextStyle(
+                                  color: myColor == Colors.blue
+                                      ? Colors.black
+                                      : Colors.grey[700],
+                                  fontSize: 16.sp,
+                                ),
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.arrow_drop_down,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
+                  listview1
+                      ? Card(
+                          elevation: 9,
+                          child: MediaQuery.removePadding(
+                            context: context,
+                            removeTop: true,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: venderList.length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        myColor = Colors.blue;
+                                        tapped = true;
+                                        selectedValue =
+                                            countriesList[index].toString();
+                                        listview1 = false;
+                                        selectedValueIndex = index;
+                                      });
+                                    },
+                                    child: ListTile(
+                                      title: Text(countriesList[index]),
+                                    ),
+                                  );
+                                }),
+                          ),
+                        )
+                      : SizedBox(),
                   SizedBox(
                     height: 16.h,
                   ),
-                  DropdownButtonFormField(
-                    onSaved: (newValue) => print(newValue),
-                    items: vendeerList3,
-                    hint: const Text('Select Vender'),
-                    onTap: () {},
-                    onChanged: (value) {
-                      setState(() {
-                        value = vendeerList3;
-                        vendeerList3.clear();
-                      });
-                    },
-                    decoration: getInputDecoration(hintText: 'Select Country'),
+                  Container(
+                    width: Get.width,
+                    height: 55.h,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: myColor, width: 2),
+                      borderRadius: BorderRadius.circular(
+                        8.r,
+                      ),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          listview = !listview;
+                        });
+                      },
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 8.0.w, top: 0.h),
+                              child: Text(
+                                selectedVender == ''
+                                    ? "Choice vender here..."
+                                    : selectedVender,
+                                style: TextStyle(
+                                  color: myColor == Colors.blue
+                                      ? Colors.black
+                                      : Colors.grey[700],
+                                  fontSize: 16.sp,
+                                ),
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.arrow_drop_down,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  listview
+                      ? Card(
+                          elevation: 9,
+                          child: MediaQuery.removePadding(
+                            context: context,
+                            removeTop: true,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: tapped ? 1 : venderList.length,
+                              itemBuilder: (context, index) => GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    myColor == Colors.blue;
+                                    listview = false;
+                                    selectedVender =
+                                        venderList[selectedValueIndex!];
+                                  });
+                                },
+                                child: ListTile(
+                                  title: selectedValueIndex != null
+                                      ? Text(venderList[selectedValueIndex!])
+                                      : Text(venderList[index]),
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      : SizedBox(),
+                  SizedBox(
+                    height: 16.h,
                   ),
                   SizedBox(
                     height: 40.h,
